@@ -138,7 +138,7 @@ jQuery( document ).ready(
 					function () {
 						// Initialize autocomplete instances, if Keywords exist.
 						if ( typeof wp_zinc_autocomplete_initialize !== 'undefined' ) {
-							wp_zinc_autocomplete_initialize();
+							wp_zinc_autocomplete_initialize( '.custom-field-row' );
 						}
 					},
 					500

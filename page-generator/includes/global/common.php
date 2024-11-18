@@ -429,8 +429,6 @@ class Page_Generator_Pro_Common {
 				// Gutenberg.
 				'h1[contenteditable=true]',
 
-				// Gutenberg's content area is handled using Dashboard Submodule's WPZincAutocompleterControl in autocomplete-gutenberg.js.
-
 				// TinyMCE Plugins.
 				'.wpzinc-autocomplete',
 			);

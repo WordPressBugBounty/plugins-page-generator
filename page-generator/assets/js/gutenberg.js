@@ -35,7 +35,7 @@ if ( typeof wp !== 'undefined' &&
 				if ( jQuery( 'h1.wp-block-post-title' ).hasClass( 'is-selected' ) ) {
 					// Post Title editor is ready; initialize autocomplete on Gutenberg Title field, if Keywords exist.
 					if ( typeof wp_zinc_autocomplete_initialize !== 'undefined' ) {
-						wp_zinc_autocomplete_initialize();
+						wp_zinc_autocomplete_initialize( '.editor-visual-editor__post-title-wrapper' );
 					}
 
 					// Calling the constant will stop subscribing to future events, as we've now initialized
