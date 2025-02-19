@@ -65,14 +65,13 @@ class Page_Generator {
 		$this->plugin->author_name       = 'WP Zinc';
 		$this->plugin->version           = PAGE_GENERATOR_PLUGIN_VERSION;
 		$this->plugin->buildDate         = PAGE_GENERATOR_PLUGIN_BUILD_DATE;
-		$this->plugin->requires          = '5.0';
-		$this->plugin->tested            = '6.0';
 		$this->plugin->php_requires      = '7.1';
 		$this->plugin->folder            = PAGE_GENERATOR_PLUGIN_PATH;
 		$this->plugin->url               = PAGE_GENERATOR_PLUGIN_URL;
 		$this->plugin->documentation_url = 'https://www.wpzinc.com/documentation/page-generator-pro';
 		$this->plugin->support_url       = 'https://www.wpzinc.com/support';
 		$this->plugin->upgrade_url       = 'https://www.wpzinc.com/plugins/page-generator-pro';
+		$this->plugin->logo              = PAGE_GENERATOR_PLUGIN_URL . 'assets/images/icons/logo.svg';
 		$this->plugin->review_name       = 'page-generator';
 		$this->plugin->review_notice     = sprintf(
 			/* translators: Plugin Name */
@@ -165,8 +164,35 @@ class Page_Generator {
 		add_action( 'init', array( $this, 'initialize' ), 1 );
 		add_action( 'init', array( $this, 'upgrade' ), 2 );
 
+		// Admin Menus.
+		add_action( 'page_generator_pro_admin_admin_menu', array( $this, 'admin_menus' ) );
+
 		// Localization.
 		add_action( 'init', array( $this, 'load_language_files' ) );
+
+	}
+
+	/**
+	 * Register menus and submenus.
+	 *
+	 * @since   5.0.0
+	 *
+	 * @param   string $minimum_capability  Minimum capability required for access.
+	 */
+	public function admin_menus( $minimum_capability ) {
+
+		// Main Menu.
+		add_menu_page( $this->plugin->displayName, $this->plugin->displayName, $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ), $this->plugin->logo );
+
+		// Sub Menu.
+		$keywords_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Keywords', 'page-generator' ), __( 'Keywords', 'page-generator' ), $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ) );
+		add_action( "load-$keywords_page", array( $this->get_class( 'admin' ), 'add_keyword_screen_options' ) );
+
+		$groups_page   = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate Content', 'page-generator' ), __( 'Generate Content', 'page-generator' ), $minimum_capability, 'edit.php?post_type=' . $this->get_class( 'post_type' )->post_type_name );
+		$generate_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate', 'page-generator' ), __( 'Generate', 'page-generator' ), $minimum_capability, $this->plugin->name . '-generate', array( $this->get_class( 'admin' ), 'generate_screen' ) );
+
+		// Menus.
+		$upgrade_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Upgrade', 'page-generator' ), __( 'Upgrade', 'page-generator' ), $minimum_capability, $this->plugin->name . '-upgrade', array( $this->get_class( 'admin' ), 'upgrade_screen' ) );
 
 	}
 

@@ -7,21 +7,23 @@
  */
 
 ?>
-<div class="wrap">
-	<h1 class="wp-heading-inline">
+<header style="--wpzinc-logo: url('<?php echo esc_attr( $this->base->plugin->logo ); ?>')">
+	<h1>
 		<?php echo esc_html( $this->base->plugin->displayName ); ?>
 
 		<span>
 			<?php esc_html_e( 'Add New Keyword', 'page-generator' ); ?>
 		</span>
 	</h1>
+</header>
 
-	<?php
-	// Button Links.
-	require_once 'keywords-links.php';
-	?>
-
+<div class="wrap">
 	<div class="wrap-inner">
+		<?php
+		// Button Links.
+		require_once 'keywords-links.php';
+		?>
+
 		<div id="poststuff">
 			<div id="post-body" class="metabox-holder columns-1">
 				<!-- Content -->

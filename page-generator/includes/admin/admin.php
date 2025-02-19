@@ -276,34 +276,28 @@ class Page_Generator_Pro_Admin {
 	 */
 	public function admin_menu() {
 
-		global $submenu;
-
-		// Define the minimum capability required to access the Menu and Sub Menus.
+		// Define the minimum capability required to access settings.
 		$minimum_capability = 'manage_options';
 
 		/**
-		 * Defines the minimum capability required to access the Media Library Organizer
+		 * Defines the minimum capability required to access the Plugin's
 		 * Menu and Sub Menus
 		 *
 		 * @since   2.8.9
 		 *
-		 * @param   string  $capability     Minimum Required Capability
+		 * @param   string  $capability     Minimum Required Capability.
 		 * @return  string                  Minimum Required Capability
 		 */
 		$minimum_capability = apply_filters( 'page_generator_pro_admin_admin_menu_minimum_capability', $minimum_capability );
 
-		// Main Menu.
-		add_menu_page( $this->base->plugin->displayName, $this->base->plugin->displayName, $minimum_capability, $this->base->plugin->name . '-keywords', array( $this, 'keywords_screen' ), 'dashicons-format-aside' );
-
-		// Sub Menu.
-		$keywords_page = add_submenu_page( $this->base->plugin->name . '-keywords', __( 'Keywords', 'page-generator' ), __( 'Keywords', 'page-generator' ), $minimum_capability, $this->base->plugin->name . '-keywords', array( $this, 'keywords_screen' ) );
-		add_action( "load-$keywords_page", array( $this, 'add_keyword_screen_options' ) );
-
-		$groups_page   = add_submenu_page( $this->base->plugin->name . '-keywords', __( 'Generate Content', 'page-generator' ), __( 'Generate Content', 'page-generator' ), $minimum_capability, 'edit.php?post_type=' . $this->base->get_class( 'post_type' )->post_type_name );
-		$generate_page = add_submenu_page( $this->base->plugin->name . '-keywords', __( 'Generate', 'page-generator' ), __( 'Generate', 'page-generator' ), $minimum_capability, $this->base->plugin->name . '-generate', array( $this, 'generate_screen' ) );
-
-		// Menus.
-		$upgrade_page = add_submenu_page( $this->base->plugin->name . '-keywords', __( 'Upgrade', 'page-generator' ), __( 'Upgrade', 'page-generator' ), $minimum_capability, $this->base->plugin->name . '-upgrade', array( $this, 'upgrade_screen' ) );
+		/**
+		 * Add settings menus and sub menus for the Plugin's settings.
+		 *
+		 * @since   1.0.0
+		 *
+		 * @param   string  $minimum_capability     Minimum capability required.
+		 */
+		do_action( 'page_generator_pro_admin_admin_menu', $minimum_capability );
 
 	}
 
