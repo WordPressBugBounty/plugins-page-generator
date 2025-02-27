@@ -89,6 +89,19 @@ class Page_Generator_Pro_Admin {
 			wp_enqueue_style( $this->base->plugin->name . '-admin', $this->base->plugin->url . 'assets/css/admin.css', array(), $this->base->plugin->version );
 		}
 
+		// Define CSS variables for design.
+		wp_register_style( $this->base->plugin->name . '-vars', false, array(), $this->base->plugin->version );
+		wp_enqueue_style( $this->base->plugin->name . '-vars' );
+		wp_add_inline_style(
+			$this->base->plugin->name . '-vars',
+			trim(
+				':root {
+			--wpzinc-logo: url(\'' . esc_attr( $this->base->plugin->logo ) . '\');
+			--wpzinc-plugin-display-name: "' . esc_attr( $this->base->plugin->displayName ) . ' ";
+		}'
+			)
+		);
+
 		// Determine the screen that we're on.
 		$screen = $this->base->get_class( 'screen' )->get_current_screen();
 
