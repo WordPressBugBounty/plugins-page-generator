@@ -91,7 +91,7 @@ class Page_Generator_Pro_Screen {
 			}
 
 			// Editing a Content Group on the frontend.
-			if ( isset( $_SERVER['REQUEST_URI'] ) && stripos( $_SERVER['REQUEST_URI'], $this->base->plugin->name ) !== false ) {
+			if ( isset( $_SERVER['REQUEST_URI'] ) && stripos( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), $this->base->plugin->name ) !== false ) {
 				return array(
 					'screen'  => 'content_groups',
 					'section' => 'edit',
@@ -128,7 +128,7 @@ class Page_Generator_Pro_Screen {
 			case $this->base->plugin->name . '-settings':
 				$result = array(
 					'screen'  => 'settings',
-					'section' => ( isset( $_REQUEST['tab'] ) ? str_replace( $this->base->plugin->name . '-', '', sanitize_text_field( $_REQUEST['tab'] ) ) : 'general' ), // phpcs:ignore WordPress.Security.NonceVerification
+					'section' => ( isset( $_REQUEST['tab'] ) ? str_replace( $this->base->plugin->name . '-', '', sanitize_text_field( wp_unslash( $_REQUEST['tab'] ) ) ) : 'general' ), // phpcs:ignore WordPress.Security.NonceVerification
 				);
 				break;
 
@@ -146,7 +146,7 @@ class Page_Generator_Pro_Screen {
 			 * Keywords
 			 */
 			case $this->base->plugin->name . '-keywords':
-				$cmd = ( isset( $_REQUEST['cmd'] ) ? sanitize_text_field( $_REQUEST['cmd'] ) : false ); // phpcs:ignore WordPress.Security.NonceVerification
+				$cmd = ( isset( $_REQUEST['cmd'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['cmd'] ) ) : false ); // phpcs:ignore WordPress.Security.NonceVerification
 				switch ( $cmd ) {
 					// Keywords WP_List_Table.
 					case false:

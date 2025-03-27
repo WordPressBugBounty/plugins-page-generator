@@ -580,9 +580,14 @@ class Page_Generator_Pro_Groups_UI {
 			return;
 		}
 
+		// Bail if no settings are being saved.
+		if ( ! isset( $_POST[ $this->base->plugin->name ] ) ) {
+			return;
+		}
+
 		// Save the Group's Settings.
 		$result = $this->base->get_class( 'groups' )->save(
-			$this->base->get_class( 'common' )->recursive_sanitize_text_field( $_POST[ $this->base->plugin->name ] ),
+			$this->base->get_class( 'common' )->recursive_sanitize_text_field( wp_unslash( $_POST[ $this->base->plugin->name ] ) ), // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$post_id
 		);
 

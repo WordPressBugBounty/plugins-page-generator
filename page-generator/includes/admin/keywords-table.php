@@ -300,7 +300,7 @@ class Page_Generator_Pro_Keywords_Table extends WP_List_Table {
 	 */
 	public function get_search() {
 
-		return ( isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( urldecode( $_GET['s'] ) ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
+		return ( isset( $_GET['s'] ) ? urldecode( sanitize_text_field( wp_unslash( $_GET['s'] ) ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
 
 	}
 
@@ -313,7 +313,7 @@ class Page_Generator_Pro_Keywords_Table extends WP_List_Table {
 	 */
 	private function get_order_by() {
 
-		return ( isset( $_GET['orderby'] ) ? sanitize_sql_orderby( $_GET['orderby'] ) : 'keyword' ); // phpcs:ignore WordPress.Security.NonceVerification
+		return ( isset( $_GET['orderby'] ) ? sanitize_sql_orderby( wp_unslash( $_GET['orderby'] ) ) : 'keyword' ); // phpcs:ignore WordPress.Security.NonceVerification
 
 	}
 
@@ -326,7 +326,7 @@ class Page_Generator_Pro_Keywords_Table extends WP_List_Table {
 	 */
 	private function get_order() {
 
-		return ( isset( $_GET['order'] ) ? sanitize_text_field( $_GET['order'] ) : 'ASC' ); // phpcs:ignore WordPress.Security.NonceVerification
+		return ( isset( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'ASC' ); // phpcs:ignore WordPress.Security.NonceVerification
 
 	}
 

@@ -85,8 +85,13 @@ class Page_Generator_Pro_AJAX {
 		// Verify nonce.
 		check_ajax_referer( 'search_authors', 'nonce' );
 
+		// Bail if no query is specified.
+		if ( ! isset( $_REQUEST['query'] ) ) {
+			return wp_send_json_error( __( 'No query was specified.', 'page-generator' ) );
+		}
+
 		// Get vars.
-		$query = sanitize_text_field( $_REQUEST['query'] );
+		$query = sanitize_text_field( wp_unslash( $_REQUEST['query'] ) );
 
 		// Get results.
 		$users = new WP_User_Query(
@@ -268,7 +273,7 @@ class Page_Generator_Pro_AJAX {
 		return array(
 			'group_id'                      => absint( $_POST['id'] ),
 			'current_index'                 => ( isset( $_POST['current_index'] ) ? absint( $_POST['current_index'] ) : 0 ),
-			'last_generated_post_date_time' => ( isset( $_POST['last_generated_post_date_time'] ) ? sanitize_text_field( $_POST['last_generated_post_date_time'] ) : false ),
+			'last_generated_post_date_time' => ( isset( $_POST['last_generated_post_date_time'] ) ? sanitize_text_field( wp_unslash( $_POST['last_generated_post_date_time'] ) ) : false ),
 			'test_mode'                     => ( isset( $_POST['test_mode'] ) ? true : false ),
 		);
 

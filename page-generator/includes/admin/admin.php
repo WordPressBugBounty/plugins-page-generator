@@ -394,7 +394,7 @@ class Page_Generator_Pro_Admin {
 		$this->base->get_class( 'notices' )->set_key_prefix( 'page_generator_pro_' . wp_get_current_user()->ID );
 
 		// Get command.
-		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( $_GET['cmd'] ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
+		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( wp_unslash( $_GET['cmd'] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
 		switch ( $cmd ) {
 			/**
 			 * Add / Edit Keyword
@@ -455,9 +455,9 @@ class Page_Generator_Pro_Admin {
 		$bulk_action = array_values(
 			array_filter(
 				array(
-					( isset( $_REQUEST['action'] ) && $_REQUEST['action'] != '-1' ? sanitize_text_field( $_REQUEST['action'] ) : '' ), // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
-					( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] != '-1' ? sanitize_text_field( $_REQUEST['action2'] ) : '' ), // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
-					( isset( $_REQUEST['action3'] ) && ! empty( $_REQUEST['action3'] ) ? sanitize_text_field( $_REQUEST['action3'] ) : '' ),
+					( isset( $_REQUEST['action'] ) && $_REQUEST['action'] != '-1' ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '' ), // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
+					( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] != '-1' ? sanitize_text_field( wp_unslash( $_REQUEST['action2'] ) ) : '' ), // phpcs:ignore Universal.Operators.StrictComparisons.LooseNotEqual
+					( isset( $_REQUEST['action3'] ) && ! empty( $_REQUEST['action3'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action3'] ) ) : '' ),
 				)
 			)
 		);
@@ -491,7 +491,7 @@ class Page_Generator_Pro_Admin {
 
 				// Sanitize IDs.
 				$ids = array();
-				foreach ( $_REQUEST['ids'] as $id ) {
+				foreach ( wp_unslash( $_REQUEST['ids'] ) as $id ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					$id         = absint( sanitize_text_field( $id ) );
 					$ids[ $id ] = $id;
 				}
@@ -529,7 +529,7 @@ class Page_Generator_Pro_Admin {
 	public function run_keyword_table_row_actions() {
 
 		// Bail if no page specified.
-		$page = ( ( isset( $_GET['page'] ) ) ? sanitize_text_field( $_GET['page'] ) : false ); // phpcs:ignore WordPress.Security.NonceVerification
+		$page = ( ( isset( $_GET['page'] ) ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : false ); // phpcs:ignore WordPress.Security.NonceVerification
 		if ( ! $page ) {
 			return;
 		}
@@ -547,12 +547,12 @@ class Page_Generator_Pro_Admin {
 		}
 
 		// Bail if nonce fails verification, as it might be for a different request.
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'action-keywords' ) ) {
+		if ( ! wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'action-keywords' ) ) {
 			return;
 		}
 
 		// Bail if no row action specified.
-		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( $_GET['cmd'] ) : false );
+		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( wp_unslash( $_GET['cmd'] ) ) : false );
 		if ( ! $cmd ) {
 			return;
 		}
@@ -599,10 +599,10 @@ class Page_Generator_Pro_Admin {
 		$url = add_query_arg(
 			array(
 				'page'    => $this->base->plugin->name . '-keywords',
-				's'       => ( isset( $_REQUEST['s'] ) ? sanitize_text_field( $_REQUEST['s'] ) : '' ), // phpcs:ignore WordPress.Security.NonceVerification
-				'paged'   => ( isset( $_REQUEST['paged'] ) ? sanitize_text_field( $_REQUEST['paged'] ) : 1 ), // phpcs:ignore WordPress.Security.NonceVerification
-				'orderby' => ( isset( $_REQUEST['orderby'] ) ? sanitize_sql_orderby( $_REQUEST['orderby'] ) : 'keyword' ), // phpcs:ignore WordPress.Security.NonceVerification
-				'order'   => ( isset( $_REQUEST['order'] ) ? sanitize_text_field( $_REQUEST['order'] ) : 'ASC' ), // phpcs:ignore WordPress.Security.NonceVerification
+				's'       => ( isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '' ), // phpcs:ignore WordPress.Security.NonceVerification
+				'paged'   => ( isset( $_REQUEST['paged'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['paged'] ) ) : 1 ), // phpcs:ignore WordPress.Security.NonceVerification
+				'orderby' => ( isset( $_REQUEST['orderby'] ) ? sanitize_sql_orderby( wp_unslash( $_REQUEST['orderby'] ) ) : 'keyword' ), // phpcs:ignore WordPress.Security.NonceVerification
+				'order'   => ( isset( $_REQUEST['order'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['order'] ) ) : 'ASC' ), // phpcs:ignore WordPress.Security.NonceVerification
 			),
 			'admin.php'
 		);
@@ -620,7 +620,7 @@ class Page_Generator_Pro_Admin {
 	public function keywords_screen() {
 
 		// Get command.
-		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( $_GET['cmd'] ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
+		$cmd = ( ( isset( $_GET['cmd'] ) ) ? sanitize_text_field( wp_unslash( $_GET['cmd'] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
 		switch ( $cmd ) {
 			/**
 			 * Add / Edit Keyword
@@ -650,9 +650,9 @@ class Page_Generator_Pro_Admin {
 				// If the form has been posted, an error occured if we are here.
 				// Apply the posted values to the keyword.
 				if ( isset( $_POST['nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'save_keyword' ) ) {
-					$keyword['keyword'] = wp_unslash( sanitize_text_field( $_POST['keyword'] ) );
-					$keyword['source']  = wp_unslash( sanitize_text_field( $_POST['source'] ) );
-					$keyword['options'] = stripslashes_deep( $_POST[ $keyword['source'] ] );
+					$keyword['keyword'] = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
+					$keyword['source']  = isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '';
+					$keyword['options'] = isset( $_POST[ $keyword['source'] ] ) ? wp_unslash( $_POST[ $keyword['source'] ] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 
 				// Get Keyword Sources.
@@ -707,10 +707,10 @@ class Page_Generator_Pro_Admin {
 
 		// Validate Form Inputs.
 		$id           = ( ( isset( $_REQUEST['id'] ) && ! empty( $_REQUEST['id'] ) ) ? absint( $_REQUEST['id'] ) : '' );
-		$keyword_name = sanitize_text_field( $_POST['keyword'] );
-		$source       = sanitize_text_field( $_POST['source'] );
+		$keyword_name = isset( $_POST['keyword'] ) ? sanitize_text_field( wp_unslash( $_POST['keyword'] ) ) : '';
+		$source       = isset( $_POST['source'] ) ? sanitize_text_field( wp_unslash( $_POST['source'] ) ) : '';
 		$options      = array(
-			'data' => ( isset( $_POST[ $source ]['data'] ) ? sanitize_textarea_field( $_POST[ $source ]['data'] ) : '' ),
+			'data' => ( isset( $_POST[ $source ]['data'] ) ? sanitize_textarea_field( wp_unslash( $_POST[ $source ]['data'] ) ) : '' ),
 		);
 
 		// Build Keyword.
@@ -764,7 +764,7 @@ class Page_Generator_Pro_Admin {
 
 		// Get Group ID and Type.
 		$id   = absint( $_REQUEST['id'] ); // phpcs:ignore WordPress.Security.NonceVerification
-		$type = ( isset( $_REQUEST['type'] ) ? sanitize_text_field( $_REQUEST['type'] ) : 'content' ); // phpcs:ignore WordPress.Security.NonceVerification
+		$type = ( isset( $_REQUEST['type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['type'] ) ) : 'content' ); // phpcs:ignore WordPress.Security.NonceVerification
 
 		// Get groups class.
 		$group = $this->base->get_class( 'groups' );
