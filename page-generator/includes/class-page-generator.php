@@ -73,7 +73,49 @@ class Page_Generator {
 		$this->plugin->upgrade_url       = 'https://www.wpzinc.com/plugins/page-generator-pro';
 		$this->plugin->logo              = PAGE_GENERATOR_PLUGIN_URL . 'assets/images/icons/logo.svg';
 		$this->plugin->review_name       = 'page-generator';
-		$this->plugin->review_notice     = sprintf(
+
+		// Defer loading of Plugin Classes.
+		add_action( 'init', array( $this, 'initialize' ), 1 );
+		add_action( 'init', array( $this, 'upgrade' ), 2 );
+
+		// Admin Menus.
+		add_action( 'page_generator_pro_admin_admin_menu', array( $this, 'admin_menus' ) );
+
+	}
+
+	/**
+	 * Register menus and submenus.
+	 *
+	 * @since   5.0.0
+	 *
+	 * @param   string $minimum_capability  Minimum capability required for access.
+	 */
+	public function admin_menus( $minimum_capability ) {
+
+		// Main Menu.
+		add_menu_page( $this->plugin->displayName, $this->plugin->displayName, $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ), $this->plugin->logo );
+
+		// Sub Menu.
+		$keywords_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Keywords', 'page-generator' ), __( 'Keywords', 'page-generator' ), $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ) );
+		add_action( "load-$keywords_page", array( $this->get_class( 'admin' ), 'add_keyword_screen_options' ) );
+
+		$groups_page   = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate Content', 'page-generator' ), __( 'Generate Content', 'page-generator' ), $minimum_capability, 'edit.php?post_type=' . $this->get_class( 'post_type' )->post_type_name );
+		$generate_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate', 'page-generator' ), __( 'Generate', 'page-generator' ), $minimum_capability, $this->plugin->name . '-generate', array( $this->get_class( 'admin' ), 'generate_screen' ) );
+
+		// Menus.
+		$upgrade_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Upgrade', 'page-generator' ), __( 'Upgrade', 'page-generator' ), $minimum_capability, $this->plugin->name . '-upgrade', array( $this->get_class( 'admin' ), 'upgrade_screen' ) );
+
+	}
+
+	/**
+	 * Initializes required and licensed classes
+	 *
+	 * @since   1.9.8
+	 */
+	public function initialize() {
+
+		// Define translation strings.
+		$this->plugin->review_notice = sprintf(
 			/* translators: Plugin Name */
 			__( 'Thanks for using %s to generate content!', 'page-generator' ),
 			$this->plugin->displayName
@@ -85,16 +127,16 @@ class Page_Generator {
 		// Upgrade Reasons.
 		$this->plugin->upgrade_reasons = array(
 			array(
-				__( 'Generate any Post Type', 'page-generator' ),
-				__( 'Pro provides options to generate any Post Type, including Pages, Posts and Custom Post Types.', 'page-generator' ),
+				__( 'Generate Unlimited, Unique Posts, Pages and Custom Post Types', 'page-generator' ),
+				__( 'Create as many Content Groups as you wish, each with different settings.', 'page-generator' ),
 			),
 			array(
 				__( 'Powerful Content Generation', 'page-generator' ),
 				__( 'Combine Keyword combinations sequentially, at random or use all possible combinations. Generate content in-browser, using WP-Cron or WP-CLI.', 'page-generator' ),
 			),
 			array(
-				__( 'Generate Unlimited, Unique Posts, Pages and Custom Post Types', 'page-generator' ),
-				__( 'Create as many Content Groups as you wish, each with different settings.', 'page-generator' ),
+				__( 'AI Integrations', 'page-generator' ),
+				__( 'Generate text and images using including OpenAI, Claude AI, Gemini AI, Mistral AI, Perplexity, Deepseek, Alibaba, Grok, OpenRouter, AI Writer, ArticleForge and ContentBot.', 'page-generator' ),
 			),
 			array(
 				__( 'SEO and Schema Compatible', 'page-generator' ),
@@ -160,49 +202,7 @@ class Page_Generator {
 		}
 		$this->dashboard = new WPZincDashboardWidget( $this->plugin, 'https://www.wpzinc.com/wp-content/plugins/lum-deactivation' );
 
-		// Defer loading of Plugin Classes.
-		add_action( 'init', array( $this, 'initialize' ), 1 );
-		add_action( 'init', array( $this, 'upgrade' ), 2 );
-
-		// Admin Menus.
-		add_action( 'page_generator_pro_admin_admin_menu', array( $this, 'admin_menus' ) );
-
-		// Localization.
-		add_action( 'init', array( $this, 'load_language_files' ) );
-
-	}
-
-	/**
-	 * Register menus and submenus.
-	 *
-	 * @since   5.0.0
-	 *
-	 * @param   string $minimum_capability  Minimum capability required for access.
-	 */
-	public function admin_menus( $minimum_capability ) {
-
-		// Main Menu.
-		add_menu_page( $this->plugin->displayName, $this->plugin->displayName, $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ), $this->plugin->logo );
-
-		// Sub Menu.
-		$keywords_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Keywords', 'page-generator' ), __( 'Keywords', 'page-generator' ), $minimum_capability, $this->plugin->name . '-keywords', array( $this->get_class( 'admin' ), 'keywords_screen' ) );
-		add_action( "load-$keywords_page", array( $this->get_class( 'admin' ), 'add_keyword_screen_options' ) );
-
-		$groups_page   = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate Content', 'page-generator' ), __( 'Generate Content', 'page-generator' ), $minimum_capability, 'edit.php?post_type=' . $this->get_class( 'post_type' )->post_type_name );
-		$generate_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Generate', 'page-generator' ), __( 'Generate', 'page-generator' ), $minimum_capability, $this->plugin->name . '-generate', array( $this->get_class( 'admin' ), 'generate_screen' ) );
-
-		// Menus.
-		$upgrade_page = add_submenu_page( $this->plugin->name . '-keywords', __( 'Upgrade', 'page-generator' ), __( 'Upgrade', 'page-generator' ), $minimum_capability, $this->plugin->name . '-upgrade', array( $this->get_class( 'admin' ), 'upgrade_screen' ) );
-
-	}
-
-	/**
-	 * Initializes required and licensed classes
-	 *
-	 * @since   1.9.8
-	 */
-	public function initialize() {
-
+		// Initialize Plugin classes.
 		$this->classes = new stdClass();
 
 		$this->initialize_admin_or_frontend_editor();
