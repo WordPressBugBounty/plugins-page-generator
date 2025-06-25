@@ -1,46 +1,81 @@
-=== Page Generator ===
+=== Bulk Page Generator and Mass Page Builder - Page Generator ===
 Contributors: n7studios,wpzinc
 Donate link: https://www.wpzinc.com/plugins/page-generator-pro
 Tags: mass page generator, landing pages, multiple page generator
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.8
+Stable tag: 1.7.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Mass generate multiple Pages using dynamic content.
+Bulk generate multiple Pages using dynamic content.
 
-== Description ==
+## Description
 
-Page Generator is a mass page generator (sometimes called a bulk page generator or bulk post generator) that creates multiple pages in bulk.
+**Page Generator** is the ultimate **Bulk Page Generator**, **Mass Page Creator**, and **Mass Page Builder** for WordPress. It empowers you to generate thousands of unique, fully-optimized WordPress Pages with just a few clicks.
 
-To produce unique multiple page generator variations, <a href="https://www.wpzinc.com/documentation/page-generator-pro/keywords/">keywords</a> are used in the Plugin's content.
+Designed for advanced **Local SEO** and **Programmatic SEO** strategies, this plugin automates the creation of keyword-rich content targeting any combination of services, products, and locations.
 
-Each keyword contains the data you want - such as names, locations, services.  Page Generator will then create your WordPress Pages accordingly, saving you time vs. manually creating Pages one by one.
+It works in 3 simple steps:
 
-[youtube http://www.youtube.com/watch?v=KTBDy3-6Z1E]
+- **Define Keyword Data**: Add keyword sets (e.g. services, locations, industries) for dynamic content generation.
+- **Edit Template**: Create your content layout using placeholders like `{service}`, `{location}`, and more.
+- **Bulk Generate Pages**: Click generate and let the **Bulk Page Generator** handle mass content creation across your WordPress site.
 
-=== Usage ===
+Whether you're an agency scaling content for clients, or a business owner building local landing pages, **Page Generator** is the smartest **Mass Page Builder** available for WordPress.
 
-Page Generator can be used as a mass page creator or bulk post generator for any type of WordPress Pages, including:
-- Landing Pages, with service and location details (e.g. Web Design in New York, Web Design in London, Web Development in New York, Web Development in London etc)
-- Personalised Pages e.g. name-specific award/certificate pages
-- Individual Specific Pages
-- Producing real world placeholder content for testing Themes and Plugins with specific HTML / Blocks / Layout combinations across multiple WordPress Pages
+Perfect for:
 
-=== Methods ===
+- Creating service and location-based pages for **Local SEO**
+- Automating structured, templated content for **Programmatic SEO**
+- Saving hours of manual page creation using a flexible **Bulk Page Generator**
 
-Each keyword contain multiple words or phrases that are then cycled through for each Page that is generated depending on the chosen <a href="https://www.wpzinc.com/documentation/page-generator-pro/generate-methods/">method</a>:
-- All: Generates Pages for all possible unique combinations of terms across all keywords used.
-- Sequential: Honors the order of terms in each keyword used. Once all terms have been used in a keyword, the generator stops.
+Demo:
 
-=== Full Control ===
+https://www.youtube.com/watch?v=T07N5esAnO8
 
-Made a mistake in your mass generated content or Keywords? Page Generator can trash or delete its generated pages, allowing you to generate them again.
+---
 
-You can also limit the number of pages to generate, and Test mode generates a single page in draft mode to preview the results before full mass page generation.
+## Usage
 
+Use **Page Generator** as your:
+
+- **Mass Page Creator** for building hundreds of **Local SEO** location-specific pages like “Plumber in Chicago” or “Dentist in Boston”
+- **Bulk Page Generator** to automate the creation of product pages, service variations, or testimonial layouts
+- **Mass Page Builder** for targeting multiple regions or categories without writing unique content manually
+- **Programmatic SEO** engine to build templated content at scale, driven by structured keyword inputs
+- Testing utility for generating placeholder content across various layout combinations in WordPress
+
+With this level of flexibility, **Page Generator** supports virtually every **Local SEO** and **Programmatic SEO** use case.
+
+---
+
+## Methods
+
+Each keyword group contains multiple values. The **Bulk Page Generator** combines these values according to the selected method:
+
+- **All**: Produces every possible combination of keyword values, ideal for large-scale **Programmatic SEO** deployments.
+- **Sequential**: Cycles through keyword values in order—useful when mapping 1-to-1 relationships between keywords.
+
+These generation methods are essential for mass content strategies in both **Local SEO** and **Programmatic SEO**, and make **Page Generator** a powerful **Mass Page Builder** tool.
+
+More details: [Page Generator Methods Documentation](https://www.wpzinc.com/documentation/page-generator-pro/generate-methods/)
+
+---
+
+## Full Control
+
+Need to revise your output? The **Mass Page Creator** gives you complete control over your content:
+
+- Instantly delete or trash previously generated content
+- Use **Test Mode** to preview a single page before executing a full run
+- Define limits on the number of pages generated
+- Build content using blocks, HTML, shortcodes, or any layout you want
+
+From content creation to content cleanup, **Page Generator** is a fully-featured **Mass Page Builder**, ideal for any **Bulk Page Generator** workflow tied to **Local SEO** or **Programmatic SEO** goals.
+
+Whether you're building 10 or 10,000 pages, **Page Generator** ensures your **Mass Page Creator** strategy is fast, scalable, and SEO-friendly.
 === Pro Version ===
 
 > <a href="https://www.wpzinc.com/plugins/page-generator-pro/" rel="friend" title="Page Generator Pro">Page Generator Pro</a> provides additional functionality:<br />
@@ -95,6 +130,10 @@ There are no limits on the number of Pages that can be generated with our mass p
 3. Generating Pages screen
 
 == Changelog ==
+
+= 1.7.9 (2025-06-24) =
+* Added: Developer: Keywords: `page_generator_pro_keywords_save` filter before saving a Keyword
+* Added: Keywords: Confirmation dialog when deleting Keywords
 
 = 1.7.8 (2025-04-23) =
 * Fix: Notice: Function `_load_textdomain_just_in_time` was called incorrectly in WordPress 6.8 and higher

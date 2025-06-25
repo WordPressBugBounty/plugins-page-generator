@@ -778,6 +778,17 @@ class Page_Generator_Pro_Keywords {
 			}
 		}
 
+		/**
+		 * Filters the Keyword data before it is saved to the database.
+		 *
+		 * @since
+		 *
+		 * @param   array   $data           Keyword data.
+		 * @param   int     $id             Keyword ID.
+		 * @param   bool    $append_terms   Whether to append terms to the existing Keyword Term data.
+		 */
+		$data = apply_filters( 'page_generator_pro_keywords_save', $data, $id, $append_terms );
+
 		// If here, the Keyword can be added/edited in the database.
 		// Depending on whether an ID has been defined, update or insert the keyword.
 		if ( ! empty( $id ) ) {

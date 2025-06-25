@@ -8,6 +8,36 @@
 jQuery( document ).ready(
 	function ( $ ) {
 
+		/**
+		 * Delete Keyword Confirmation
+		 */
+		$( 'span.trash a, input[name="bulk_action"]' ).click(
+			function ( e ) {
+
+				switch ( $( this ).attr( 'name' ) ) {
+					case 'bulk_action':
+						// Confirm the Delete bulk action option was selected.
+						if ( $( 'select[name="action"]' ).val() !== 'delete' && $( 'select[name="action2"]' ).val() !== 'delete' ) {
+							return;
+						}
+
+						result = confirm( 'Are you sure you want to delete these Keywords?' );
+						break;
+					default:
+						result = confirm( 'Are you sure you want to delete this Keyword?' );
+						break;
+				}
+
+				// If the user cancels, bail.
+				if ( ! result ) {
+					e.preventDefault();
+					return false;
+				}
+
+				// Allow the request through.
+			}
+		);
+
 		// Initialize conditional fields.
 		page_generator_pro_conditional_fields_initialize();
 		$( 'select[name="source"]' ).trigger( 'change' );

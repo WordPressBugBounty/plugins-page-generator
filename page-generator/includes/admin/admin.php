@@ -133,6 +133,13 @@ class Page_Generator_Pro_Admin {
 			case 'keywords':
 				switch ( $screen['section'] ) {
 					/**
+					 * Keywords: WP_List_Table
+					 */
+					case 'wp_list_table':
+						wp_enqueue_script( $this->base->plugin->name . '-keywords' );
+						break;
+
+					/**
 					 * Keywords: Add / Edit
 					 */
 					case 'edit':
