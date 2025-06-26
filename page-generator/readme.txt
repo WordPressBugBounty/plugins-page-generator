@@ -5,7 +5,7 @@ Tags: mass page generator, landing pages, multiple page generator
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.9
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,7 @@ Perfect for:
 
 Demo:
 
-https://www.youtube.com/watch?v=T07N5esAnO8
+https://www.youtube.com/watch?v=0qPku51HNWk
 
 ---
 
@@ -126,10 +126,14 @@ There are no limits on the number of Pages that can be generated with our mass p
 == Screenshots ==
 
 1. Keywords table
-2. Editing a keyword
-3. Generating Pages screen
+2. Editing a Keyword
+3. Editing Content Group Template
+4. Viewing a generated WordPress Page
 
 == Changelog ==
+
+= 1.8.0 (2025-06-26) =
+* Fix: Keywords: Don't display confirmation dialog twice when using Bulk Actions below Keywords table
 
 = 1.7.9 (2025-06-24) =
 * Added: Developer: Keywords: `page_generator_pro_keywords_save` filter before saving a Keyword

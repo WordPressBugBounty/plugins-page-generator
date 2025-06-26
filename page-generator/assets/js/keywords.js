@@ -8,11 +8,18 @@
 jQuery( document ).ready(
 	function ( $ ) {
 
+		let keywordDeleteConfirmed = false;
+
 		/**
 		 * Delete Keyword Confirmation
 		 */
 		$( 'span.trash a, input[name="bulk_action"]' ).click(
 			function ( e ) {
+
+				// If the user has already confirmed the delete, allow the request through.
+				if ( keywordDeleteConfirmed ) {
+					return;
+				}
 
 				switch ( $( this ).attr( 'name' ) ) {
 					case 'bulk_action':
@@ -35,6 +42,7 @@ jQuery( document ).ready(
 				}
 
 				// Allow the request through.
+				keywordDeleteConfirmed = true;
 			}
 		);
 
