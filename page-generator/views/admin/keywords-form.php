@@ -53,7 +53,7 @@
 									</div>
 									<div class="right">
 										<div class="right">
-											<select name="source" size="1" class="wpzinc-conditional" data-container="#keyword-panel">
+											<select name="source" id="source"size="1" class="wpzinc-conditional" data-container="#keyword-panel">
 												<?php
 												foreach ( $sources as $source_name => $source ) {
 													?>

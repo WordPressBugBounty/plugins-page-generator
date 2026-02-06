@@ -7,7 +7,7 @@
  *
  * Plugin Name: Page Generator
  * Plugin URI: http://www.wpzinc.com/plugins/page-generator-pro
- * Version: 1.8.0
+ * Version: 1.8.1
  * Author: WP Zinc
  * Author URI: http://www.wpzinc.com
  * Description: Generate multiple Pages using dynamic content.
@@ -24,8 +24,8 @@ if ( class_exists( 'Page_Generator_Pro' ) ) {
 }
 
 // Define Plugin version and build date.
-define( 'PAGE_GENERATOR_PLUGIN_VERSION', '1.8.0' );
-define( 'PAGE_GENERATOR_PLUGIN_BUILD_DATE', '2025-06-26 18:00:00' );
+define( 'PAGE_GENERATOR_PLUGIN_VERSION', '1.8.1' );
+define( 'PAGE_GENERATOR_PLUGIN_BUILD_DATE', '2025-12-03 18:00:00' );
 
 // Define Plugin paths.
 define( 'PAGE_GENERATOR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

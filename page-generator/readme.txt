@@ -1,13 +1,13 @@
 === Bulk Page Generator and Mass Page Builder - Page Generator ===
 Contributors: n7studios,wpzinc
 Donate link: https://www.wpzinc.com/plugins/page-generator-pro
-Tags: mass page generator, landing pages, multiple page generator
+Tags: landing pages, bulk page, local seo, programmatic seo, seo
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 1.8.1
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Bulk generate multiple Pages using dynamic content.
 
@@ -131,6 +131,10 @@ There are no limits on the number of Pages that can be generated with our mass p
 4. Viewing a generated WordPress Page
 
 == Changelog ==
+
+= 1.8.1 (2025-12-03) =
+* Fix: Keywords: Add / Edit: Set ID on Source dropdown for accessiblity
+* Updated: Dashboard submodule
 
 = 1.8.0 (2025-06-26) =
 * Fix: Keywords: Don't display confirmation dialog twice when using Bulk Actions below Keywords table
