@@ -43,6 +43,10 @@
 
 										<p class="description">
 											<?php esc_html_e( 'A unique template tag name, which can then be used when generating content.', 'page-generator' ); ?>
+											<br />
+											<strong>
+												<?php esc_html_e( 'Letters, numbers, hyphens and underscores only.', 'page-generator' ); ?>
+											</strong>
 										</p>
 									</div>
 								</div>

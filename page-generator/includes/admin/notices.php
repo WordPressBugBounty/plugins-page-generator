@@ -416,16 +416,15 @@ class Page_Generator_Pro_Notices {
 		if ( count( $this->notices['success'] ) > 0 ) {
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p>
-					<?php
-					foreach ( $this->notices['success'] as $notice ) {
-						$notice_lines = explode( "\n", $notice );
-						foreach ( $notice_lines as $notice_line ) {
-							echo esc_html( $notice_line ) . '<br />';
-						}
-					}
+				<?php
+				foreach ( $this->notices['success'] as $notice ) {
 					?>
-				</p>
+					<p>
+						<?php echo wp_kses_post( $notice ); ?>
+					</p>
+					<?php
+				}
+				?>
 			</div>
 			<?php
 		}
@@ -434,16 +433,15 @@ class Page_Generator_Pro_Notices {
 		if ( count( $this->notices['warning'] ) > 0 ) {
 			?>
 			<div class="notice notice-warning is-dismissible">
-				<p>
-					<?php
-					foreach ( $this->notices['warning'] as $notice ) {
-						$notice_lines = explode( "\n", $notice );
-						foreach ( $notice_lines as $notice_line ) {
-							echo esc_html( $notice_line ) . '<br />';
-						}
-					}
+				<?php
+				foreach ( $this->notices['warning'] as $notice ) {
 					?>
-				</p>
+					<p>
+						<?php echo wp_kses_post( $notice ); ?>
+					</p>
+					<?php
+				}
+				?>
 			</div>
 			<?php
 		}
@@ -452,16 +450,15 @@ class Page_Generator_Pro_Notices {
 		if ( count( $this->notices['error'] ) > 0 ) {
 			?>
 			<div class="notice notice-error is-dismissible">
-				<p>
-					<?php
-					foreach ( $this->notices['error'] as $notice ) {
-						$notice_lines = explode( "\n", $notice );
-						foreach ( $notice_lines as $notice_line ) {
-							echo esc_html( $notice_line ) . '<br />';
-						}
-					}
+				<?php
+				foreach ( $this->notices['error'] as $notice ) {
 					?>
-				</p>
+					<p>
+						<?php echo wp_kses_post( $notice ); ?>
+					</p>
+					<?php
+				}
+				?>
 			</div>
 			<?php
 		}

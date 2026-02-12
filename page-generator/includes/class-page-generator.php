@@ -230,6 +230,7 @@ class Page_Generator {
 		$this->classes->groups_ui             = new Page_Generator_Pro_Groups_UI( self::$instance );
 		$this->classes->groups                = new Page_Generator_Pro_Groups( self::$instance );
 		$this->classes->install               = new Page_Generator_Pro_Install( self::$instance );
+		$this->classes->integrations          = new Page_Generator_Pro_Integrations( self::$instance );
 		$this->classes->keywords              = new Page_Generator_Pro_Keywords( self::$instance );
 		$this->classes->keywords_source_local = new Page_Generator_Pro_Keywords_Source_Local( self::$instance );
 		$this->classes->notices               = new Page_Generator_Pro_Notices( self::$instance );

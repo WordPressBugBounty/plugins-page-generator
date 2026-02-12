@@ -229,6 +229,7 @@ class Page_Generator_Pro_Admin {
 							'page_generator_pro_gutenberg',
 							array(
 								'keywords'  => $this->base->get_class( 'keywords' )->get_keywords_and_columns( true ),
+								'notice'    => $this->base->get_class( 'integrations' )->get_integration_notice(),
 								'post_type' => ( isset( $post->post_type ) ? $post->post_type : false ),
 							)
 						);

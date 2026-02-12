@@ -9,17 +9,32 @@
 // This prevents JS errors if this script is accidentally enqueued on a non-
 // Gutenberg editor screen, or the Classic Editor Plugin is active.
 if ( typeof wp !== 'undefined' &&
-	typeof wp.data !== 'undefined' &&
-	typeof wp.data.dispatch( 'core/edit-post' ) !== 'undefined' &&
-	wp.data.dispatch( 'core/edit-post' ) !== null ) {
+	typeof wp.blockEditor !== 'undefined' ) {
 
 	if ( typeof page_generator_pro_gutenberg != 'undefined' ) {
 
-		// Remove the Permalink Panel, if we're using Gutenberg on Content Groups.
-		if ( page_generator_pro_gutenberg.post_type == 'page-generator-pro' ) {
-			wp.data.dispatch( 'core/edit-post' ).removeEditorPanel( 'post-link' );
-			wp.data.dispatch( 'core/edit-post' ).removeEditorPanel( 'page-attributes' );
-			wp.data.dispatch( 'core/edit-post' ).removeEditorPanel( 'template' );
+		// Remove some panels if we're using Gutenberg on Content Groups.
+		if ( page_generator_pro_gutenberg.post_type == 'page-generator-pro' && typeof wp.editPost !== 'undefined' ) {
+			wp.data.dispatch( 'core/editor' ).removeEditorPanel( 'post-link' );
+			wp.data.dispatch( 'core/editor' ).removeEditorPanel( 'page-attributes' );
+			wp.data.dispatch( 'core/editor' ).removeEditorPanel( 'template' );
+
+			// Display notice if an integration is detected that requires the Pro version.
+			if ( typeof page_generator_pro_gutenberg.notice === 'object' ) {
+				wp.data.dispatch( 'core/notices' ).createInfoNotice(
+					page_generator_pro_gutenberg.notice.text,
+					{
+						id: 'page-generator-pro-integration-notice',
+						isDismissible: false,
+						actions: [
+							{
+								label: 'Upgrade',
+								url: page_generator_pro_gutenberg.notice.url
+						},
+						]
+					}
+				);
+			}
 		}
 
 		// Initialize conditional fields.

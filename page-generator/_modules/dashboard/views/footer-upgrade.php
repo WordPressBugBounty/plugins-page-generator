@@ -36,7 +36,7 @@ if ( isset( $this->base->plugin->upgrade_reasons ) && is_array( $this->base->plu
 			</li>
 		</ul>
 
-		<a href="<?php echo esc_url( $this->base->dashboard->get_upgrade_url( 'settings_footer_upgrade' ) ); ?>" class="button button-primary button-large" target="_blank"><?php esc_html_e( 'Upgrade Now', $this->base->plugin->name ); // phpcs:ignore WordPress.WP.I18n ?></a>
+		<a href="<?php echo esc_url( $this->base->dashboard->get_upgrade_url( 'settings_footer_upgrade' ) ); ?>" class="button button-primary button-large" target="_blank"><?php esc_html_e( 'Upgrade Now - 20% off with code NEWYEAR', $this->base->plugin->name ); // phpcs:ignore WordPress.WP.I18n ?></a>
 		<a href="<?php echo esc_url( $this->base->dashboard->get_upgrade_url( 'settings_footer_upgrade' ) ); ?>" class="button button-large" target="_blank"><?php esc_html_e( 'See all Features', $this->base->plugin->name ); // phpcs:ignore WordPress.WP.I18n ?></a>
 	</div>
 	<?php

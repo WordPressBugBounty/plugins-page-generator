@@ -17,6 +17,16 @@
 			?>
 		</p>
 
+		<p>
+			<?php
+			printf(
+				'%s <code>%s</code>',
+				esc_html__( 'Consider upgrading to Page Generator Pro for 20% off with code', 'page-generator' ),
+				esc_html( 'NEWYEAR' ),
+			);
+			?>
+		</p>
+
 		<a href="<?php echo esc_attr( $this->base->dashboard->get_upgrade_url( 'settings_inline_upgrade' ) ); ?>" class="button" target="_blank"><?php esc_html_e( 'Upgrade', 'page-generator' ); ?></a>
 	</div>
 </div>
