@@ -5,7 +5,7 @@ Tags: landing pages, bulk page, local seo, programmatic seo, seo
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,9 @@ There are no limits on the number of Pages that can be generated with our mass p
 4. Viewing a generated WordPress Page
 
 == Changelog ==
+
+= 1.8.3 (2026-03-07) =
+* Fix: Updated upgrade notices
 
 = 1.8.2 (2026-02-12) =
 * Added: Keywords: Instructions for permitted characters when specifying a Keyword name

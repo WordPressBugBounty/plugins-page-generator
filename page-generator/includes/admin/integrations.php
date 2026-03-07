@@ -200,7 +200,7 @@ class Page_Generator_Pro_Integrations {
 		return sprintf(
 			'%s %s',
 			esc_html( $integration_text ),
-			esc_html__( 'support is available in Page Generator Pro. Consider upgrading to Pro for 20% off with code NEWYEAR', 'page-generator' ),
+			esc_html__( 'support is available in Page Generator Pro.', 'page-generator' ),
 		);
 
 	}
