@@ -3,9 +3,9 @@ Contributors: n7studios,wpzinc
 Donate link: https://www.wpzinc.com/plugins/page-generator-pro
 Tags: landing pages, bulk page, local seo, programmatic seo, seo
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.8.6
+Stable tag: 1.8.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,6 +131,9 @@ There are no limits on the number of Pages that can be generated with our mass p
 4. Viewing a generated WordPress Page
 
 == Changelog ==
+
+= 1.8.7 (2026-08-19) =
+* WordPress 7.1 compatibility
 
 = 1.8.6 (2026-06-29) =
 * Updated: Dashboard submodule
