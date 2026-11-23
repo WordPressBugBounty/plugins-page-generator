@@ -229,6 +229,11 @@ class Page_Generator_Pro_AJAX {
 		// Validate.
 		$group = $this->generate_validation();
 
+		// Bail if the user cannot access the Plugin.
+		if ( ! current_user_can( apply_filters( 'page_generator_pro_admin_admin_menu_minimum_capability', 'manage_options' ) ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'page-generator' ) );
+		}
+
 		/**
 		 * Runs any actions after Generate Content has finished.
 		 *
